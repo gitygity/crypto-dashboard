@@ -1,3 +1,4 @@
+import FavoriteButton from "@/components/FavoriteButton";
 import LivePrice from "@/components/LivePrice";
 import { getCoin } from "@/lib/crypto";
 import { Coin, paramsType } from "@/types/models";
@@ -16,7 +17,6 @@ export async function generateMetadata({params}: paramsType) {
 export default async function CoinPage({ params }: paramsType) {
   const { id } =await params;
   const coin = (await getCoin(id)) as Coin;
-  console.log("🚀 ~ CoinPage ~ coin:", coin.id)
 
   return (
     <div className="p-6 space-y-4">
@@ -28,6 +28,7 @@ export default async function CoinPage({ params }: paramsType) {
       <p className="text-lg">${coin.market_data.current_price.usd}</p>
 
       <LivePrice symbol={coin.symbol} />
+      <FavoriteButton id={coin.id}/>
     </div>
   );
 }

@@ -1,36 +1,129 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🪙 Crypto Dashboard
 
-## Getting Started
+A **Next.js 13** cryptocurrency dashboard that shows real-time coin prices, detailed coin pages, and a personal watchlist. This project demonstrates **Server Actions**, **ISR**, **fetch caching**, **Client Components**, and dynamic routes in Next.js.
 
-First, run the development server:
+---
+
+## ⚡ Features
+
+- **Real-time prices:** Live coin price updates using WebSocket (Binance API).  
+- **Detailed coin pages:** Click any coin to view its market data, including name, symbol, image, and current USD price.  
+- **Watchlist:**
+  - Add/remove coins to your personal watchlist
+  - Server actions handle watchlist state
+  - Watchlist persists across sessions
+  - Buttons update dynamically when a coin is added/removed
+- **Favorites:**
+  - Mark coins as favorites
+  - Favorites are persisted in **Local Storage**
+  - Buttons update dynamically to reflect favorite state
+- **Server-side fetching:** Coin data is fetched on the server using Next.js `fetch` with ISR (`revalidate`) and fetch caching.  
+- **Dynamic routes:** Individual coin pages (`/dashboard/[id]`).  
+- **Metadata generation:** Dynamic `<title>` and `<description>` per coin page.  
+- **TypeScript types:** Full type safety for coins, coin lists, and parameters.
+---
+
+## 🧩 Project Structure
+
+```
+/app
+  /dashboard
+    /[id]/page.tsx       # Coin details page
+    page.tsx             # Dashboard with coins, watchlist, and favorites
+/lib
+  crypto.ts               # Server-side fetching of coin data from CoinGecko API
+/actions
+  watchlist.ts            # Server Actions: add/remove coins to watchlist
+  favorites.ts            # Client-side actions: add/remove coins to favorites (Local Storage)
+/components
+  WatchlistButton.tsx     # Button to toggle coin in watchlist
+  FavoriteButton.tsx      # Button to toggle coin as favorite
+  LivePrice.tsx           # Real-time coin price component using WebSocket
+/types
+  models.ts               # TypeScript types (Coin, CoinList, paramsType)
+
+```
+
+---
+
+## 🚀 Getting Started
+
+1. **Clone the repository:**
+
+```bash
+git clone https://github.com/gitygity/crypto-dashboard.git
+cd crypto-dashboard
+```
+
+2. **Install dependencies:**
+
+```bash
+npm install
+# or
+yarn install
+```
+
+3. **Set environment variables:**
+
+Create a `.env.local` file at the root:
+
+```
+COINGECKO_API_KEY=<your_api_key>
+```
+
+4. **Run the development server:**
 
 ```bash
 npm run dev
 # or
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000/dashboard](http://localhost:3000/dashboard) to view your dashboard.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 🛠 Next.js Capabilities Used
 
-To learn more about Next.js, take a look at the following resources:
+- **Server Actions:**  
+  Manage watchlist and favorites server-side without client API calls. Changes are applied on the server and UI updates with `revalidatePath`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **ISR & Fetch Caching:**  
+  Fetch coin data with automatic revalidation (`revalidate`) to improve performance and reduce redundant requests.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **Dynamic Routes:**  
+  `/dashboard/[id]` for individual coin details pages.
 
-## Deploy on Vercel
+- **Client Components:**  
+  - `LivePrice` → real-time price updates via WebSocket.  
+  - `WatchlistButton` & `FavoriteButton` → interactive client-side components.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **Metadata Generation:**  
+  Dynamic `<title>` and `<description>` for coin detail pages using `generateMetadata`.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **TypeScript Support:**  
+  Type safety for API responses and props.
+
+- **Local Storage Integration:**  
+  Favorites managed in local storage and synced with UI dynamically.
+
+- **WebSocket Integration:**  
+  Display live coin prices using Binance WebSocket API.
+
+- **`revalidatePath` Usage:**  
+  Updates other pages after server actions to keep UI in sync without full page reload.
+
+---
+
+## 💻 Screenshots
+
+
+
+---
+
+## 📌 Notes
+
+- Watchlist updates are immediate thanks to **Server Actions** and Next.js `revalidatePath`.  
+- `LivePrice` uses WebSocket; for HTTPS in development, run the server with HTTPS enabled.  
+- All API calls are **server-side**; client never exposes your API key.
