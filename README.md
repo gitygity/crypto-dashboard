@@ -129,7 +129,8 @@ The live demo showcases real-time coin prices, watchlist management, favorites, 
 ## 💻 Screenshots
 
 ![dashboard](image.png)
-![dashboard](image.png)
+<img width="1830" height="1009" alt="image" src="https://github.com/user-attachments/assets/88174675-0cbe-42c9-9560-5961563e506e" />
+
 
 ---
 
