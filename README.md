@@ -116,11 +116,23 @@ Open [http://localhost:3000/dashboard](http://localhost:3000/dashboard) to view 
 
 ---
 
-## 💻 Screenshots
+## 🌐 Live Demo
 
+Check out the deployed version of the Crypto Dashboard:
 
+[https://crypto-dashboard-ten-psi.vercel.app/](https://crypto-dashboard-ten-psi.vercel.app/)
+
+The live demo showcases real-time coin prices, watchlist management, favorites, and dynamic coin pages.
 
 ---
+
+## 💻 Screenshots
+
+![dashboard](image.png)
+![dashboard](image.png)
+
+---
+
 
 ## 📌 Notes
 
